@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductsService} from "./services/products.service";
+import {IProduct} from "./models/products.model";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private ProductService:ProductsService) {}
   title = 'shop';
+  basket:IProduct[] = []
 }

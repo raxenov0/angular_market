@@ -1,0 +1,54 @@
+<div  class="absolute bg-blue-200 top-0 bottom-0 left-0 right-0"></div>
+<div *ngIf="signIn" class="w-1/4 absolute min-w-[330px] min-h-[400px] bg-white right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2">
+  <p class="font-medium text-2xl text-center my-10">Авторизация</p>
+  <form [formGroup]="form1" (ngSubmit)="onSubmit1()">
+    <div class="flex flex-col gap-4">
+
+      <div class="w-1/2 mx-auto  min-w-[280px]">
+        <p class="text-gray-400">Email</p>
+        <input formControlName="email1" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="email">
+      </div>
+
+      <div class="w-1/2 mx-auto  min-w-[280px]">
+        <p class="text-gray-400">Password</p>
+        <input formControlName="password1" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="password">
+      </div>
+      <p *ngIf="this.errorSignIn && form1.touched" class="text-red-500 font-medium mx-auto">{{this.getErrorSignIn()}}</p>
+
+      <button [ngClass]="{ 'bg-gray-300':form1.invalid && form1.controls.email1.touched && form1.controls.password1.touched}"
+              class="mt-[10px] bg-yellow-400 mb-4 p-3 mx-auto py-2 rounded-2xl font-medium" [disabled]="form1.invalid">
+        Войти
+      </button>
+      <span class="flex flex-col text-center justify-center mb-4">Нет аккаунта? <p (click)="signIn = !signIn" class="font-medium cursor-pointer">Зарегистрироваться</p></span>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="!signIn" class="w-1/4 absolute min-w-[330px] min-h-[400px] bg-white right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2">
+  <p class="font-medium text-2xl text-center my-10">Авторизация</p>
+  <form [formGroup]="form2" (ngSubmit)="onSubmit2()">
+    <div class="flex flex-col gap-4">
+
+      <div class="w-1/2 mx-auto  min-w-[280px]">
+        <p class="text-gray-400">Username</p>
+        <input formControlName="username2" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="text">
+      </div>
+
+      <div class="w-1/2 mx-auto  min-w-[280px]">
+        <p class="text-gray-400">Email</p>
+        <input formControlName="email2" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="email">
+      </div>
+
+      <div class="w-1/2 mx-auto  min-w-[280px]">
+        <p class="text-gray-400">Password</p>
+        <input formControlName="password2" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="password">
+      </div>
+      <p *ngIf="this.errorRegist && form2.touched" class="text-red-500 font-medium mx-auto">{{this.getErrorReg()}}</p>
+      <button [ngClass]="{'bg-gray-300':form2.invalid && form2.controls.email2.touched && form2.controls.password2.touched}"
+      class="mt-[10px] mb-4 bg-yellow-400 p-3 mx-auto py-2 rounded-2xl font-medium" [disabled]="form2.invalid">Регистрация</button>
+      <span class="flex flex-col text-center justify-center mb-4">Есть аккаунта? <p (click)="signIn = !signIn" class="font-medium cursor-pointer">Войти</p></span>
+
+    </div>
+  </form>
+</div>
+

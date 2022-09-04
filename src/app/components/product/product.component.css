@@ -1,0 +1,12 @@
+.block_item:hover{
+  background-color: rgb(0 0 0 / 2%);;
+}
+.block_item:hover > .hover_item {
+  filter: blur(4px)
+}
+.btn_item{
+  display: none;
+}
+.block_item:hover > .btn_item{
+  display: flex;
+}

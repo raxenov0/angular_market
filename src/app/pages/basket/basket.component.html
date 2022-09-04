@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="w-10/12 mx-auto border-y-2 p-6 flex justify-around my-[100px]">
+  <div class="flex justify-center gap-10">
+    <img class="max-w-[150px] rounded-2xl" src="https://i.pravatar.cc" alt="">
+    <div class="flex-col flex items-center justify-center gap-4 font-medium">
+      <p class="text-[26px]">{{this.firebase.displayName}}</p>
+      <p>Nizhniy Novgorod</p>
+    </div>
+  </div>
+  <div class="flex justify-center items-center font-medium text-xl">
+    <p>Заказы: {{productService.basket.length}}</p>
+  </div>
+</div>
+<div class="w-10/12 mx-auto">
+  <div class="w-full flex justify-between">
+    <p class="ml-6 text-2xl font-medium">Корзина:</p>
+    <p class="text-2xl font-medium mr-[100px]">Сумма заказов: {{setPayment() | currency}}</p>
+  </div>
+
+  <div *ngIf="productService.basket.length!==0">
+    <app-product  *ngFor="let item of this.productService.basket" [product]="item" [modification]="productService.basketModification"></app-product>
+  </div>
+  <p *ngIf="productService.basket.length == 0" class="my-10 text-center font-medium text-2xl">Ничего не найдено</p>
+
+</div>
+<app-modal-window *ngIf="modal.modal"></app-modal-window>

@@ -14,6 +14,7 @@ import { BasketComponent} from "./pages/basket/basket.component";
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { CreateModalComponent } from './components/create-modal/create-modal.component';
 
 
 
@@ -31,6 +32,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     ShopPageComponent,
     ModalWindowComponent,
     LoaderComponent,
+    CreateModalComponent,
 
   ],
     imports: [

@@ -1,0 +1,13 @@
+.products_pages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.products_pages::-webkit-scrollbar-track {
+  background-color: #0d1430;
+  border-radius: 100px;
+}
+
+.products_pages::-webkit-scrollbar-thumb {
+  background-color: #99a2c6;
+  border-radius: 100px;
+}

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductsService} from "../../services/products.service";
 import {ModalService} from "../../services/modal.service";
+import {IProduct} from "../../models/products.model";
 
 
 
@@ -14,7 +15,9 @@ export class PagesComponent implements OnInit {
 
   constructor(public productsService:ProductsService, public modal: ModalService) { }
 
-
+  name:string = ''
+  loading:boolean = false
+  modalWindow:boolean = false;
 
   sorts = [
     {name:'Дешевле', value:'price', option: '1'},
@@ -24,6 +27,10 @@ export class PagesComponent implements OnInit {
   ]
 
   typeSort:{name:string,value:string, option:string} =   {name:'По алфавиту', value:'title', option: 'title'}
+
+  setModalWindow(value:boolean){
+    this.modalWindow = value;
+  }
 
   createTypeSort(value:any){
     this.sorts.forEach(e=>{
@@ -45,8 +52,10 @@ export class PagesComponent implements OnInit {
     }
   }
 
-  name:string = ''
-  loading:boolean = false
+  addProduct(data:IProduct){
+    this.productsService.products.push(data)
+  }
+
 
   view(sort:any){
     console.log(sort.target.value)
@@ -56,6 +65,7 @@ export class PagesComponent implements OnInit {
 
     if(this.productsService.products.length == 0) {
       this.loading = true;
+
       this.productsService.getProducts().subscribe(()=>{
         this.loading = false
       })

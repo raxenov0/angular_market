@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit {
   @Input() product:IProduct
   @Input() modification:boolean
 
+
   openFullInfo(){
     this.modal.modal = true;
     this.productService.item = this.product

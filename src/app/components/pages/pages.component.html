@@ -1,6 +1,6 @@
-<div class="">
-  <p class="text-center mt-[50px] mb-10 text-3xl">Каталог товаров</p>
-  <div class="w-10/12 mx-auto my-10 flex relative">
+<div >
+  <p class="text-center mt-[40px] mb-10 text-3xl">Каталог товаров</p>
+  <div class="w-10/12 mx-auto my-10 flex relative justify-between items-center">
 
 
 
@@ -8,16 +8,17 @@
         <option value selected disabled>Сортировка</option>
         <option *ngFor="let sort of sorts" [ngValue]="sort.value" >{{sort.name}}</option>
       </select>
-  <div class="flex justify-center absolute right-1/2 translate-x-1/2 w-1/4">
+  <div class="flex justify-center w-1/4">
     <input class="w-full  border h-10 px-3 outline-0 mx-auto" [(ngModel)]="name" placeholder="Search..." type="text">
   </div>
 
+    <button (click)="setModalWindow(true)" class="px-8 py-3 bg-blue-400 rounded font-medium text-zinc-50">Add</button>
 
   </div>
   <div class="w-10/12 mx-auto border h-[70vh]">
     <app-loader *ngIf="loading && productsService.products.length == 0"></app-loader>
 
-    <div class="overflow-y-scroll flex flex-wrap w-full h-full" *ngIf="!loading && productsService.products">
+    <div class="overflow-y-scroll flex flex-wrap w-full h-full products_pages" *ngIf="!loading && productsService.products">
 
       <app-product *ngFor="let item of productsService.products | filterProduct: name;"
                    [product]="item" [modification]="productsService.basketModification"
@@ -27,4 +28,5 @@
 
   </div>
 </div>
+<app-create-modal *ngIf="this.modalWindow == true" (buttonClick)="setModalWindow($event)"></app-create-modal>
 <app-modal-window *ngIf="modal.modal"></app-modal-window>

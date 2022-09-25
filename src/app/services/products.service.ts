@@ -28,6 +28,11 @@ export class ProductsService{
     if(!this.basketModification) this.addBasket(item)
     else this.removeBasket(item)
   }
+  addItem(item:IProduct):IProduct{
+    const lastId = this.products[this.products.length-1].id
+    this.products.push({...item, id:lastId+1})
+    return {...item, id:lastId+1}
+  }
   addBasket(item:IProduct):boolean{
     this.basket.push(item)
     console.log('add')

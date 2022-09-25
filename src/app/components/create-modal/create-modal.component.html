@@ -1,0 +1,42 @@
+<div (click)="change(false)"
+     class="absolute flex justify-center items-center top-0 bottom-0 right-0 left-0 bg-blue-200">
+
+  <div class="w-1/3 bg-blue-400 flex flex-wrap justify-around p-6" (click)="$event.stopPropagation()">
+    <form [formGroup]="formLoad" (ngSubmit)="onSubmitLoad()" class="w-full flex flex-wrap">
+
+      <div class="w-1/2 flex flex-col justify-center items-center">
+        <img class="border rounded p-2 bg-blue-200 w-6/8" [src]="path" alt="">
+        <div class="flex justify-center gap-x-3 items-center relative">
+          <input formControlName="url"
+                 [(ngModel)]="newPath" class="w-5/6 mx-auto my-3 outline-0 border p-2 rounded" type="text"
+                 placeholder="Image url...">
+          <button (click)="loadImg(); $event.preventDefault()" [disabled]="formLoad.controls.url.invalid" class="px-2 rounded h-[40px] font-medium"
+                  [ngClass]="{'bg-gray-300':formLoad.controls.url.invalid, 'bg-yellow-400':!formLoad.controls.url.invalid}" type="button">OK</button>
+          <p *ngIf="formLoad.controls.url.touched && statusText.length > 0"  class="absolute bottom-[-10px] font-medium text-black left-0">Error: {{statusText}}</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col w-1/2 items-center">
+        <input formControlName="title" class="w-4/6 mx-auto my-3 outline-0 border p-2 rounded" type="text" placeholder="Title...">
+        <input formControlName="category" class="w-4/6 mx-auto my-3 outline-0 border p-2 rounded" type="text" placeholder="Category...">
+        <div class="flex justify-around">
+          <div class="w-2/6 mx-auto my-3 relative">
+            <input formControlName="price" class="w-full  outline-0 border p-2 rounded" type="number" placeholder="Price">
+            <span class="absolute right-[4px] top-[50%] translate-y-[-50%] text-gray-400">$</span>
+          </div>
+
+          <input formControlName="count" class="w-2/6 mx-auto my-3 outline-0 border p-2 rounded" type="number" placeholder="Count">
+        </div>
+        <textarea formControlName="description"
+                  class="w-4/6 mx-auto my-3 outline-0 border p-2 rounded" type="text"
+                  placeholder="Description..."></textarea>
+        <button class="p-2 font-medium"
+                [ngClass]="{'bg-gray-300':formLoad.invalid || !imgLoad, 'bg-yellow-400':!formLoad.controls.url.invalid && imgLoad}"
+                [disabled]="formLoad.invalid || !imgLoad" type="submit">Загрузить</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+

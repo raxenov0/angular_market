@@ -11,6 +11,10 @@ import {FirebaseService} from "../../services/firebase.service";
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit{
+
+  editedUsername:string = ''
+  inputView:boolean = false
+
   constructor(public productService:ProductsService, public modal:ModalService, public firebase:FirebaseService) { }
   sumPayment:number = this.productService.basket.reduce((sum: number, item: IProduct) => sum + item.price, 0);
 
@@ -19,7 +23,13 @@ export class BasketComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    console.log(this.firebase.getUsernameEmail())
     this.productService.basketModification = true;
+  }
+
+  async editUsernameFunction(){
+    await this.firebase.updateName(this.editedUsername)
+    this.inputView = !this.inputView
+    console.log(this.editedUsername)
   }
 }

@@ -29,18 +29,29 @@ export class ProductsService{
     else this.removeBasket(item)
   }
   addItem(item:IProduct):IProduct{
-    const lastId = this.products[this.products.length-1].id
-    this.products.push({...item, id:lastId+1})
-    return {...item, id:lastId+1}
+    this.products.push(item)
+    return item
   }
   addBasket(item:IProduct):boolean{
     this.basket.push(item)
     console.log('add')
     return true
   }
-  removeBasket(item:IProduct):boolean{
-    this.basket = this.basket.filter(product=> product.id != item.id)
-    return true
+  async removeBasket(item:IProduct){
+    try {
+      await fetch('https://fakestoreapi.com/products/'+item.id,{
+        method:"DELETE"
+      })
+        .then(res=>res.json())
+        .then(json=>console.log(json))
+
+      this.basket = this.basket.filter(product=> product.id != item.id)
+      return true
+    } catch (error){
+      console.log(error)
+      return false
+    }
+
   }
 
 }

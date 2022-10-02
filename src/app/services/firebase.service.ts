@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile,sendEmailVerification, updateEmail} from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +22,7 @@ export class FirebaseService {
   errorRegist:string
   auntification:boolean = false
   displayName:string | null
+  email:string | null
 
   public async register(email:string, password:string, userName:string){
     try {
@@ -31,6 +31,7 @@ export class FirebaseService {
         await updateProfile(this.auth.currentUser, {
           displayName: userName
         })
+        this.email = user.email
         this.displayName = userName
         this.auntification = true
         localStorage.setItem('login', email)
@@ -51,6 +52,7 @@ export class FirebaseService {
       const {user} = await signInWithEmailAndPassword(this.auth, email, password)
       this.displayName = user.displayName
       this.auntification = true
+      this.email = user.email
       localStorage.setItem('login', email)
       localStorage.setItem('password', password)
       return true
@@ -59,6 +61,16 @@ export class FirebaseService {
       this.errorSignIn = "Неправильный логин или пароль"
       return false
     }
+  }
+
+  public updateName = async(value:string) =>{
+    this.auth.currentUser?
+    await updateProfile(this.auth.currentUser, {
+      displayName: value
+    }).then(()=>console.log('successful'))
+      .then(()=>this.displayName = value)
+      .catch((error) => console.log("Error :("))
+      : ''
   }
 
   public async logOut(){
@@ -76,6 +88,9 @@ export class FirebaseService {
     }
   }
 
+  public getUsernameEmail(){
+    return [this.displayName,this.email]
+  }
 
   constructor() {}
 }

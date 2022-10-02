@@ -1,5 +1,6 @@
 <div class="right-0 left-0 bottom-0 top-0 bg-blue-200 fixed"></div>
-<div class="w-1/2 min-w-[300px]  bg-white fixed p-[10px] bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex justify-around">
+<div
+  class="w-1/2 min-w-[300px]  bg-white fixed p-[10px] bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex justify-around">
   <button (click)="modal.modal = false" class="absolute font-medium text-2xl right-[30px] top-4">X</button>
   <div class="w-1/3 flex-col flex items-center justify-around">
     <img [src]="productService.item.image" class="h-3/4  border-2 object-contain" alt="">
@@ -12,15 +13,15 @@
     <p class="mb-8">Category: {{productService.item.category}}</p>
 
     <span class="font-medium">{{productService.item.description}}</span>
-   <div class=" flex my-10 justify-around">
-     <p class="font-medium text-2xl">{{productService.item.price | currency}}</p>
-     <div class="flex items-center gap-1">
+    <div class=" flex my-10 justify-around">
+      <p class="font-medium text-2xl">{{productService.item.price | currency}}</p>
+      <div class="flex items-center gap-1">
 
-       <img class="w-[20px] h-[20px]" src="./../../../assets/img/star.png" alt="">
-       <p class="font-medium text-2xl">{{productService.item.rating.rate}}</p>
-     </div>
+        <img class="w-[20px] h-[20px]" src="./../../../assets/img/star.png" alt="">
+        <p class="font-medium text-2xl">{{productService.item.rating.rate}}</p>
+      </div>
 
-   </div>
+    </div>
 
   </div>
 </div>

@@ -25,9 +25,9 @@ export class AuthService implements OnInit{
 
   }
 
-  onUnSubmit(){
+  async onUnSubmit(){
     console.log('log out success')
-    this.firebase.logOut()
+    await this.firebase.logOut()
       .then((res)=>this.auth = res)
       .then(()=>this.router.navigate(['']))
   }

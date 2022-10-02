@@ -16,13 +16,15 @@ export class AuthComponent implements OnInit {
   form2:FormGroup
 
 
-  errorSignIn:string
-  errorRegist:string
+  errorSignIn:string=''
+  errorRegist:string=''
 
   getErrorSignIn(){
     return this.errorSignIn
   }
-
+  setErrorSignIn(stroke:string){
+    this.errorSignIn = stroke
+  }
   getErrorReg(){
     return this.errorRegist
   }
@@ -30,11 +32,11 @@ export class AuthComponent implements OnInit {
  async onSubmit1() {
    console.log(this.form1)
    await this.authService.onSubmitAuth(this.form1.value.email1, this.form1.value.password1)
-   this.errorSignIn = this.authService.firebase.errorSignIn
    for (let name in this.form1.controls) {
      this.form1.controls[name].setErrors(null);
      this.form1.controls[name].setValue('');
    }
+   this.setErrorSignIn(this.authService.firebase.errorSignIn)
  }
   async onSubmit2(){
     console.log(this.form2)
@@ -48,6 +50,7 @@ export class AuthComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.form1 = new FormGroup({
       'email1': new FormControl(localStorage.getItem('login') as string | null, [Validators.required, Validators.email]),
       'password1' : new FormControl(localStorage.getItem('password') as string | null, [Validators.required, Validators.minLength(6)])

@@ -4,7 +4,18 @@
   <div class="flex justify-center gap-10">
     <img class="max-w-[150px] rounded-2xl" src="https://i.pravatar.cc" alt="">
     <div class="flex-col flex items-center justify-center gap-4 font-medium">
-      <p class="text-[26px]">{{this.firebase.displayName}}</p>
+
+      <div class=" flex items-center gap-x-4">
+        <p *ngIf="!inputView" class="text-[26px]">{{this.firebase.displayName}}</p>
+        <div *ngIf="inputView" class="flex gap-x-1">
+          <input [(ngModel)]="editedUsername" class="border outline-0 px-1 w-[140px]" type="text">
+          <button class="p-2 bg-blue-400 text-teal-50" [disabled]="editedUsername.length < 3" (click)="editUsernameFunction()">ОК</button>
+        </div>
+
+        <img src="./../../../assets/img/edit.png" (click)="inputView = !inputView" class="w-[24px] h-[24px] cursor-pointer" alt="">
+      </div>
+
+      <p class="text-[26px]">{{this.firebase.getUsernameEmail()[1]}}</p>
       <p>Nizhniy Novgorod</p>
     </div>
   </div>

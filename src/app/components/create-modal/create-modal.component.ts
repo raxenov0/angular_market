@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../../services/products.service";
+import {IProduct} from "../../models/products.model";
 
 @Component({
   selector: 'app-create-modal',
@@ -28,10 +29,10 @@ export class CreateModalComponent implements OnInit {
   //   rate:number,
   //   count:number
   // }
-   onSubmitLoad() {
+   async onSubmitLoad() {
     console.log(this.formLoad)
-     const item = {
-       id:0,
+     const item:IProduct = {
+      id:0,
        title:this.formLoad.value.title,
        price:this.formLoad.value.price,
        description:this.formLoad.value.description,
@@ -42,7 +43,16 @@ export class CreateModalComponent implements OnInit {
          count:this.formLoad.value.count,
        }
      }
-     this.productService.addItem(item)
+
+     await fetch('https://fakestoreapi.com/products',{
+       method:"POST",
+       body:JSON.stringify(item)
+     })
+       .then(res=>res.json())
+       .then(json=> this.productService.addItem({...item, id:json.id}))
+
+     //
+     // this.productService.addItem(item)
 
      for (let name in this.formLoad.controls) {
        this.formLoad.controls[name].setErrors(null);

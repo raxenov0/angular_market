@@ -13,7 +13,7 @@
         <p class="text-gray-400">Password</p>
         <input formControlName="password1" class="w-full mx-auto text-xl outline-0 h-[35px] flex items-center border px-2" placeholder="" type="password">
       </div>
-      <p *ngIf="this.errorSignIn && form1.touched" class="text-red-500 font-medium mx-auto">{{this.getErrorSignIn()}}</p>
+      <p *ngIf="this.errorSignIn.length  && form1.touched" class="text-red-500 font-medium mx-auto">{{errorSignIn}}</p>
 
       <button [ngClass]="{ 'bg-gray-300':form1.invalid && form1.controls.email1.touched && form1.controls.password1.touched}"
               class="mt-[10px] bg-yellow-400 mb-4 p-3 mx-auto py-2 rounded-2xl font-medium" [disabled]="form1.invalid">
